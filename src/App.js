@@ -4,19 +4,19 @@ import Categories from './Categories'
 import items from './data'
 
 function App() {
-  const list = items.map(({ category }) => category)
-
   // remove duplicates
-  const categories = list.reduce(
-    (total, curr) => {
-      if (!total.includes(curr)) {
-        total.push(curr)
-      }
-      return total
-    },
-    ['all']
-  )
 
+  // const list = items.map(({ category }) => category)
+  // const categories = list.reduce(
+  //   (total, curr) => {
+  //     if (!total.includes(curr)) {
+  //       total.push(curr)
+  //     }
+  //     return total
+  //   },
+  //   ['all']
+  // )
+  const categories = ['all', ...new Set(items.map((item) => item.category))]
   const [menuItems, setMenuItems] = useState(items)
 
   const filterItem = (type) => {
