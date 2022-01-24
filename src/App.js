@@ -7,7 +7,7 @@ function App() {
   const list = items.map(({ category }) => category)
 
   // remove duplicates
-  const newCategories = list.reduce(
+  const categories = list.reduce(
     (total, curr) => {
       if (!total.includes(curr)) {
         total.push(curr)
@@ -17,8 +17,17 @@ function App() {
     ['all']
   )
 
-  const [categories, setcategories] = useState(newCategories)
   const [menuItems, setMenuItems] = useState(items)
+
+  const filterItem = (type) => {
+    if (type === 'all') {
+      setMenuItems(items)
+      return
+    }
+    const list = items.filter(({ category }) => category === type)
+
+    setMenuItems(list)
+  }
 
   return (
     <main className="menu section">
@@ -26,7 +35,7 @@ function App() {
         <h2>our menu</h2>
         <div className="underline"></div>
       </div>
-      <Categories categories={categories}></Categories>
+      <Categories categories={categories} filterItem={filterItem}></Categories>
       <Menu items={menuItems}></Menu>
     </main>
   )
